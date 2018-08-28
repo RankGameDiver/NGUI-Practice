@@ -932,77 +932,10 @@ public class UIInput : MonoBehaviour
                     if (ch == '\uF703') continue;
                     if (ch == '\uF728') continue;
 
-                    if (Application.platform == RuntimePlatform.OSXWebPlayer || Application.platform == RuntimePlatform.WindowsWebPlayer)
+
+                    if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
                     {
-                        if (Config.getInt(CONFIGIDX.OPTION_KEYBOARDCHANGE) == 0 && characterLimit > 100)
-                        //						if( characterLimit > 100 )
-                        {
-                            if (ch >= ' ')
-                            {
-                                if (cVietnam.Instance._onChar_TELEX(0, ch, cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count - 1))
-                                {
-                                    value = "";
-                                    Insert(cVietnam.Instance._ImeList[0].stVTM.wsString);
-                                }
-                            }
-                            else
-                            {
-                                if (ch == 8 && cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count > 0)
-                                {
-                                    cVietnam.Instance._ImeList[0].stVTM.vtMixString.RemoveAt(cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count - 1);
-
-                                    string temp = "";
-
-                                    for (int k = 0; k < cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count; k++)
-                                    {
-                                        temp += cVietnam.Instance._ImeList[0].stVTM.vtMixString[k].wcWord[0];
-                                    }
-
-                                    cVietnam.Instance._ImeList[0].stVTM.wsString = temp;
-                                    cVietnam.Instance._ImeList[0].stVTM.nMixIndex = -1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (ch >= ' ') Insert(ch.ToString());
-                        }
-                    }
-                    else if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-                    {
-                        if (Config.getInt(CONFIGIDX.OPTION_KEYBOARDCHANGE) == 0 && characterLimit > 100)
-                        //						if( characterLimit > 100 )
-                        {
-                            if (ch >= ' ')
-                            {
-                                if (cVietnam.Instance._onChar_TELEX(0, ch, cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count - 1))
-                                {
-                                    value = "";
-                                    Insert(cVietnam.Instance._ImeList[0].stVTM.wsString);
-                                }
-                            }
-                            else
-                            {
-                                if (ch == 8 && cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count > 0)
-                                {
-                                    cVietnam.Instance._ImeList[0].stVTM.vtMixString.RemoveAt(cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count - 1);
-
-                                    string temp = "";
-
-                                    for (int k = 0; k < cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count; k++)
-                                    {
-                                        temp += cVietnam.Instance._ImeList[0].stVTM.vtMixString[k].wcWord[0];
-                                    }
-
-                                    cVietnam.Instance._ImeList[0].stVTM.wsString = temp;
-                                    cVietnam.Instance._ImeList[0].stVTM.nMixIndex = -1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (ch >= ' ') Insert(ch.ToString());
-                        }
+                        if (ch >= ' ') Insert(ch.ToString());
                     }
                 }
                 //0611
@@ -1136,12 +1069,6 @@ public class UIInput : MonoBehaviour
             {
                 if (mSelectionStart < 1) return;
                 --mSelectionEnd;
-            }
-
-            if (cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count > 0)
-            {
-                cVietnam.Instance._ImeList[0].stVTM.vtMixString.RemoveAt(cVietnam.Instance._ImeList[0].stVTM.vtMixString.Count - 1);
-                cVietnam.Instance._ImeList[0].stVTM.nMixIndex = -1;
             }
 
             Insert("");
